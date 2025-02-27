@@ -4,69 +4,69 @@
 text <- "And so even though we face the difficulties of today and tomorrow, I still have a dream."
 text
 
-# SprawdŸ czêstoœci s³ów za pomoc¹ pakietu qdap
+# SprawdÅ¸ czÃªstoÅ“ci sÂ³Ã³w za pomocÂ¹ pakietu qdap
 install.packages("qdap")
 library(qdap)
 
 freq_terms(text)
 
-# Zapisz najczêœciej wystêpuj¹ce terminy w ramce danych
+# Zapisz najczÃªÅ“ciej wystÃªpujÂ¹ce terminy w ramce danych
 frequent_terms <- freq_terms(text)
 frequent_terms
 
-# Wizualizacja najczêœciej wystêpuj¹cych terminów
+# Wizualizacja najczÃªÅ“ciej wystÃªpujÂ¹cych terminÃ³w
 plot(frequent_terms)
 
 # UWAGA
-# S³owa nie s¹ wymienione w takiej kolejnoœci, w jakiej wystêpuj¹ w zdaniu
-# s¹ prezentowane w porz¹dku alfabetycznym.
-# Takie podejœcie nazywa siê Bag of Words (torba s³ów).
+# SÂ³owa nie sÂ¹ wymienione w takiej kolejnoÅ“ci, w jakiej wystÃªpujÂ¹ w zdaniu
+# sÂ¹ prezentowane w porzÂ¹dku alfabetycznym.
+# Takie podejÅ“cie nazywa siÃª Bag of Words (torba sÂ³Ã³w).
 
-# Inne mo¿liwoœci pakietu qdap
+# Inne moÂ¿liwoÅ“ci pakietu qdap
 ?freq_terms
 
-# Wizualizacja za pomoc¹ ggplot2
+# Wizualizacja za pomocÂ¹ ggplot2
 library(ggplot2)
 
 ggplot(frequent_terms, aes(x = WORD, y = FREQ)) +
   geom_bar(stat = "identity", fill = "skyblue") +
-  labs(x = "S³owo", y = "Czêstoœæ") +
+  labs(x = "SÂ³owo", y = "CzÃªstoÅ“Ã¦") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  ggtitle("Wykres czêstoœci s³ów")
+  ggtitle("Wykres czÃªstoÅ“ci sÂ³Ã³w")
 
 ggplot(frequent_terms, aes(y = WORD, x = FREQ)) +
   geom_bar(stat = "identity", fill = "skyblue") +
-  labs(x = "S³owo", y = "Czêstoœæ") +
+  labs(x = "SÂ³owo", y = "CzÃªstoÅ“Ã¦") +
   theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-  ggtitle("Wykres czêstoœci s³ów")
+  ggtitle("Wykres czÃªstoÅ“ci sÂ³Ã³w")
 
 # Bardziej atrakcyjna wizualizacja
 ggplot(frequent_terms, aes(x = FREQ, y = reorder(WORD, FREQ))) +
   geom_bar(stat = "identity", fill = "skyblue", color = "darkblue", alpha = 0.8) +
-  labs(x = "Czêstoœæ", y = "S³owo") +
-  ggtitle("Wykres czêstoœci s³ów") +
+  labs(x = "CzÃªstoÅ“Ã¦", y = "SÂ³owo") +
+  ggtitle("Wykres czÃªstoÅ“ci sÂ³Ã³w") +
   theme_minimal() +
   theme(axis.text.y = element_text(size = 10), # Dostosowanie rozmiaru czcionki etykiet na osi Y
-        plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Wyœrodkowanie i stylizacja tytu³u wykresu
-        panel.grid.major.y = element_blank(), # Usuniêcie g³ównych linii siatki poziomej
-        panel.grid.minor.y = element_blank(), # Usuniêcie mniejszych linii siatki poziomej
+        plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # WyÅ“rodkowanie i stylizacja tytuÂ³u wykresu
+        panel.grid.major.y = element_blank(), # UsuniÃªcie gÂ³Ã³wnych linii siatki poziomej
+        panel.grid.minor.y = element_blank(), # UsuniÃªcie mniejszych linii siatki poziomej
         axis.line = element_line(color = "black")) # Dostosowanie linii osi
 
-# Stopwords (stop s³owa – s³owa do usuniêcia)
-# Najczêœciej wystêpuj¹ce 25, 100 i 200 s³ów
+# Stopwords (stop sÂ³owa â€“ sÂ³owa do usuniÃªcia)
+# NajczÃªÅ“ciej wystÃªpujÂ¹ce 25, 100 i 200 sÂ³Ã³w
 
 Top25Words
 Top100Words
 Top200Words
 
-# Usuniêcie stop s³ów
+# UsuniÃªcie stop sÂ³Ã³w
 frequent_terms2 <- freq_terms(text, stopwords = Top25Words)
 frequent_terms3 <- freq_terms(text, stopwords = Top100Words)
 frequent_terms4 <- freq_terms(text, stopwords = Top200Words)
 
 plot(frequent_terms4)
 
-# Zadanie 2. Analiza ca³ego akapitu ----
+# Zadanie 2. Analiza caÂ³ego akapitu ----
 
 # Wczytaj dane tekstowe
 text <- "And so even though we face the difficulties of today and tomorrow, I still have a dream. It is a dream deeply rooted in the American dream."
